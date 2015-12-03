@@ -14,9 +14,23 @@ namespace BrainFuzz
         [STAThread]
         static void Main()
         {
+            try
+            {
+                newMain();
+            }
+            catch (System.IO.FileNotFoundException fnfe)
+            {
+                MessageBox.Show("Could not load required files. Make sure BrainFuzzInterpreter.dll is in the same directory.",
+                    "Error Loading Files", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
+        }
+        public static void newMain()
+        {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
+
     }
 }
