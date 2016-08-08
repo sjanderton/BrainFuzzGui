@@ -129,6 +129,26 @@ namespace BrainFuzz
         {
             txtProg.SelectionTabs = new int[] { 25, 50, 75, 100 };
             txtProg.AutoWordSelection = false;
+            
+            //Open file if provided via command line
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+            {
+                string fileName = args[1];
+                try
+                {
+                    txtProg.Lines = File.ReadAllLines(fileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error opening file.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            
+            //dont show something's changed message on close
+            saved = true;
+            prevText = txtProg.Text;
+            
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
